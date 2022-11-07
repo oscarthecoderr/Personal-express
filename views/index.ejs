@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>nba</title>
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="font-awesome.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>players</h1>
+  <h2>stats</h2>
+<!-- a  container with 4 elements -->
+<!--in a form, player name, players team, most career points,most career assist. -->
+<!--  -->
+<!--  -->
+<!--  -->
+<form action="/player" method="post">
+  <div class="form-group">
+      <label>Player Name</label>
+      <input type="text" class="list" name="playerName">
+  </div>
+  <div class="form-group">
+      <label>player team</label>
+      <input type="text" class="list" name="team">
+  </div>
+  <div class="form-group">
+      <label>Most career points</label>
+      <input type="number" class="list" name="careerPoints">
+  </div>
+  <div class="form-group">
+      <label>Career assists</label>
+      <input type="number" class="list" name="careerAssists">
+  </div>
+
+  <button type="submit" class="btn btn-warning btn-lg">Submit</button>
+</form>
+
+  <h3>Messages</h3>
+    <ul class="container">
+      <%for(var i=0; i<messages.length; i++) {%>
+        <li class="playerStats">
+          <span><%= messages[i].playerName %></span>
+          <span><%= messages[i].team %></span>
+          <span><%= messages[i].careerPoints %></span>
+          <span><%= messages[i].careerAssists %></span>
+          <span><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+        </li>
+      <% } %>
+      </ul>
+
+
+
+  <script src="main.js"></script>
+
+</body>
+</html>
