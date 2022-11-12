@@ -2,53 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>nba</title>
+  <title>NBA PhoneBook </title>
   <link rel="shortcut icon" href="favicon.ico">
-  <link rel="stylesheet" href="font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/41069aef2b.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>players</h1>
-  <h2>stats</h2>
-<!-- a  container with 4 elements -->
-<!--in a form, player name, players team, most career points,most career assist. -->
-<!--  -->
-<!--  -->
-<!--  -->
-<form action="/player" method="post">
-  <div class="form-group">
-      <label>Player Name</label>
-      <input type="text" class="list" name="playerName">
-  </div>
-  <div class="form-group">
-      <label>player team</label>
-      <input type="text" class="list" name="team">
-  </div>
-  <div class="form-group">
-      <label>Most career points</label>
-      <input type="number" class="list" name="careerPoints">
-  </div>
-  <div class="form-group">
-      <label>Career assists</label>
-      <input type="number" class="list" name="careerAssists">
-  </div>
+  <h1>CONTACT PLAYER</h1>
+  
 
-  <button type="submit" class="btn btn-warning btn-lg">Submit</button>
-</form>
+          <form action="/player" method="post"><label class="validation-error hide" id="fullEmailValidationError">This field is required.</label>           
+            <div>
+              <label>Full Name*</label>
+              <input type="text" name="fullName" id="fullName">
+            </div>
+            <div>
+              <label>Phone No.</label>
+              <input type="text" name="empCode" id="empCode">
+            </div>
+            <div>
+              <label>Address</label>
+              <input type="text" name="address" id="address">
+            </div>
+            <div>
+              <label>City</label>
+              <input type="text" name="city" id="city">
+            </div>
 
-  <h3>Messages</h3>
-    <ul class="container">
-      <%for(var i=0; i<messages.length; i++) {%>
-        <li class="playerStats">
-          <span><%= messages[i].playerName %></span>
-          <span><%= messages[i].team %></span>
-          <span><%= messages[i].careerPoints %></span>
-          <span><%= messages[i].careerAssists %></span>
-          <span><i class="fa fa-trash-o" aria-hidden="true"></i></span>
-        </li>
-      <% } %>
-      </ul>
+            <div>
+                <label>Email*</label>       
+                  <input type="text" name="fullEmail" id="fullEmail"/>
+              <div class="form-action-buttons">
+                <button type="submit" value="Submit">SUBMIT</button>
+              </div>
+            </div>  
+          </form>
+          
+  <h3>CONTACT INFO</h3>
 
+  <table>
+    <tr>
+      <th>name</th>
+      <th>phone number</th>
+      <th>address</th>
+      <th>city</th>
+      <th>email</th>    
+      <th>delete</th>
+    </tr>
+
+      
+        <% for(let i=0 ;i<info.length ; i++) {%>
+        <tr id="<%= info[i]._id%>"> 
+          <td><input value="<%=info[i].fullName%>"><i class="fa-solid fa-pen-to-square"></i></td>
+          <td><input value="<%=info[i].empCode%>"></td>
+          <td><input value="<%=info[i].address%>"></td>
+          <td><input value="<%=info[i].city%>"></td>
+          <td><input value="<%=info[i].fullEmail%>"></td>
+          <td><i class="fa-trash fa-solid"></i></td>
+        </tr>   
+        <%}%>
+       
+  </table>
+   
 
 
   <script src="main.js"></script>

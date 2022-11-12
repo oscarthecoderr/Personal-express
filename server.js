@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
   db.collection('stats').find().toArray((err, result) => {
     if (err) return console.log(err)
     console.log(result)
-    res.render('index.ejs', {messages: result})
+    res.render('index.ejs', {info: result})
     
   })
 })
@@ -36,10 +36,11 @@ app.post('/player', (req, res) => {
   console.log(req.body)
   db.collection('stats').insertOne(
     {
-      playerName: req.body.playerName, 
-      team: req.body.team, 
-      careerPoints: req.body.careerPoints,
-      careerAssists:req.body.careerAssists,
+      fullName: req.body.fullName, 
+      empCode: req.body.empCode, 
+      address: req.body.address,
+      city:req.body.city,
+      fullEmail:req.body.fullEmail
     }, 
       (err, result) => {
     if (err) return console.log(err)
@@ -48,21 +49,21 @@ app.post('/player', (req, res) => {
   })
 })
 
-// app.put('/player', (req, res) => {
-//   console.log()
-//   db.collection('stats')
-//   .findOneAndUpdate({_id: ObjectId(req.body._id)}, {
-//     $inc: {
-//       thumbUp:1
-//     }
-//   }, {
-//     sort: {_id: -1},
-//     upsert: true
-//   }, (err, result) => {
-//     if (err) return res.send(err)
-//     res.send(result)
-//   })
-// })
+app.put('/edit', (req, res) => {
+  console.log(req.body)
+  db.collection('stats')
+  .findOneAndUpdate({_id: ObjectId(req.body._id)}, {
+    $set: {
+      fullName:req.body.newText.trim()
+    }
+  }, {
+    sort: {_id: -1},
+    upsert: true
+  }, (err, result) => {
+    if (err) return res.send(err)
+    res.send(result)
+  })
+})
 
 // app.put('/messages', (req, res) => {
 //   console.log()
@@ -80,8 +81,8 @@ app.post('/player', (req, res) => {
 //   })
 // })
 
-app.delete('/messages', (req, res) => {
-  db.collection('stats').findOneAndDelete({playerName:req.body.playerName,team:req.body.team}, (err, result) => {
+app.delete('/delete', (req, res) => {
+  db.collection('stats').findOneAndDelete({_id: ObjectId(req.body._id)}, (err, result) => {
     if (err) return res.send(500, err)
     res.send('Message deleted!')
   })
